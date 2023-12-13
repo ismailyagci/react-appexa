@@ -5,12 +5,6 @@ import Provider from "./provider";
 import validation from "./validation";
 import * as utils from "./utils";
 
-export {
-    store,
-    request,
-    container,
-    validation,
-    utils
-};
+export { store, request, container, validation, utils };
 
 export default Provider;
