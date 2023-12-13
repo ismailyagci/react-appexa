@@ -78,7 +78,7 @@ export default {
 `storeModules` süreçlerini örneklerle anlayacağız. İlk örneğimiz auth süreçleri olacak. Detaylar için [bu](docs/storeModules.md) dökümana bakabilirsiniz. CRUD işlemleri için [bu](docs/storeModulesCrud.md) dökümana bakabilirisinz.
 
 
-### Request 
+### Request
 
 Request süreçlerinin yönetimini kolaylaştırmak için oluşturulmuşdur. Detaylar için [bu](docs/request.md) dökümana bakabilirsiniz.
 
