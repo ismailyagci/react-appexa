@@ -1,0 +1,48 @@
+{
+  "name": "react-appexa",
+  "version": "1.0.0",
+  "description": "",
+  "files": [
+    "dist"
+  ],
+  "main": "./dist/react-appexa.umd.js",
+  "module": "./dist/react-appexa.es.js",
+  "exports": {
+    ".": {
+      "import": "./dist/react-appexa.es.js",
+      "require": "./dist/react-appexa.umd.js"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@testing-library/dom": "^9.3.1",
+    "@testing-library/react": "^14.0.0",
+    "@vitejs/plugin-react": "^4.0.4",
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "c8": "^8.0.1",
+    "eslint": "^8.47.0",
+    "eslint-plugin-react": "^7.33.1",
+    "jsdom": "^22.1.0",
+    "react-test-renderer": "^18.2.0",
+    "vite": "^4.4.9",
+    "vitest": "^0.34.1"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "^4.0.4",
+    "@vitejs/plugin-react-refresh": "^1.3.1",
+    "axios": "^1.4.0",
+    "esbuild": "^0.19.1",
+    "react": "^18.2.0",
+    "react-redux": "^8.1.2",
+    "redux": "^4.2.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.4.2"
+  }
+}
