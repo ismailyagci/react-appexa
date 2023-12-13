@@ -75,12 +75,12 @@ export default {
 };
 ```
 
-`storeModules` süreçlerini örneklerle anlayacağız. İlk örneğimiz auth süreçleri olacak. Detaylar için [bu](docs/storeModules.md) dökümana bakabilirsiniz. CRUD işlemleri için [bu](docs/storeModulesCrud.md) dökümana bakabilirisinz.
+`storeModules` süreçlerini örneklerle anlayacağız. İlk örneğimiz auth süreçleri olacak. Detaylar için [bu](https://github.com/ismailyagci/react-appexa/blob/master/docs/storeModules.md) dökümana bakabilirsiniz. CRUD işlemleri için [bu](https://github.com/ismailyagci/react-appexa/blob/master/docs/storeModulesCrud.md) dökümana bakabilirisinz.
 
 
 ### Request
 
-Request süreçlerinin yönetimini kolaylaştırmak için oluşturulmuşdur. Detaylar için [bu](docs/request.md) dökümana bakabilirsiniz.
+Request süreçlerinin yönetimini kolaylaştırmak için oluşturulmuşdur. Detaylar için [bu](https://github.com/ismailyagci/react-appexa/blob/master/docs/request.md) dökümana bakabilirsiniz.
 
 ## Lisans
 
