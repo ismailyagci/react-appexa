@@ -3,7 +3,7 @@ import messages from "./messages";
 import { returnMessage } from "./utils";
 
 /**
-*   @typedef {("password" | "string" | "number" | "email" | "length" | "required" | "array" | "nestedSlug" | "oneOf" | "isObject")} TypePatterns
+*   @typedef {("faxNumber" | "phoneNumber" | "schema" | "slug" | "password" | "string" | "number" | "email" | "length" | "required" | "array" | "nestedSlug" | "oneOf" | "isObject")} TypePatterns
 */
 
 /**
@@ -26,6 +26,7 @@ const validation = (schema = {}, props = {}) => {
     const value = props[propName];
 
     const valueValidate = types.required(value);
+    if (schemaFields.optional && !valueValidate) continue;
     if (!valueValidate) return returnMessage(
       messages.required(schemaFields.fieldTitle, value, schemaFields.typeOptions)
     );
