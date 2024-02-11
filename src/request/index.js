@@ -46,11 +46,43 @@ class RequestManager {
     return response.data.code === 200;
   }
 
-  getMethod = async (requestConfig, params) => {
+  replaceParams = (template = "", params = {}) => {
+    let replacedTemplate = template;
+    const paramsKeys = Object.keys(params);
+
+    for (const index in paramsKeys) {
+      const key = paramsKeys[index];
+      const regex = new RegExp(`{{${key}}}`, "g"); // Daha spesifik bir regex kullanıldı.
+      replacedTemplate = replacedTemplate.replace(regex, params[key]);
+    }
+
+    return replacedTemplate;
+  };
+
+  templateReplacer = (template, params) => {
+    let replacedTemplate = "";
+
+    const splitedTemplate = template.split("}}");
+    splitedTemplate.forEach((templatePart, index) => {
+      const isLastPart = index + 1 === splitedTemplate.length;
+
+      replacedTemplate += this.replaceParams(
+        `${templatePart}${!isLastPart ? "}}" : ""}`,
+        params
+      );
+    });
+
+    return replacedTemplate.trim();
+  };
+
+  getMethod = async (requestConfig, params, urlParams) => {
     return await new Promise((resolve, reject) => {
+      const url = urlParams
+        ? this.templateReplacer(requestConfig.url, urlParams)
+        : requestConfig.url;
       this.axios
         .get(
-          requestConfig.url,
+          url,
           { params },
           {
             headers: requestConfig?.headers || {},
@@ -64,10 +96,14 @@ class RequestManager {
     });
   };
 
-  postMethod = async (requestConfig, params) => {
+  postMethod = async (requestConfig, params, urlParams) => {
     return await new Promise((resolve, reject) => {
+      const url = urlParams
+        ? this.templateReplacer(requestConfig.url, urlParams)
+        : requestConfig.url;
+
       this.axios
-        .post(requestConfig.url, params, {
+        .post(url, params, {
           headers: requestConfig?.headers || {},
         })
         .then((res) => {
