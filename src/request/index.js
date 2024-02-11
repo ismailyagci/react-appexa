@@ -124,8 +124,8 @@ class RequestManager {
     };
     requestKeys.forEach((requestKey) => {
       const request = this.config[requestKey];
-      this.request[requestKey] = (params) =>
-        methods[request.type](request, params);
+      this.request[requestKey] = (params, urlParams) =>
+        methods[request.type](request, params, urlParams);
     });
     container.set("requestMethodsCreated", true);
   }
