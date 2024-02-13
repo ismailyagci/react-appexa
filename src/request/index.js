@@ -75,14 +75,15 @@ class RequestManager {
     return replacedTemplate.trim();
   };
 
+  getUrl = (url, urlParams) => {
+    return urlParams ? this.templateReplacer(url, urlParams) : url;
+  };
+
   getMethod = async (requestConfig, params, urlParams) => {
     return await new Promise((resolve, reject) => {
-      const url = urlParams
-        ? this.templateReplacer(requestConfig.url, urlParams)
-        : requestConfig.url;
       this.axios
         .get(
-          url,
+          this.getUrl(requestConfig.url, urlParams),
           { params },
           {
             headers: requestConfig?.headers || {},
@@ -98,12 +99,36 @@ class RequestManager {
 
   postMethod = async (requestConfig, params, urlParams) => {
     return await new Promise((resolve, reject) => {
-      const url = urlParams
-        ? this.templateReplacer(requestConfig.url, urlParams)
-        : requestConfig.url;
-
       this.axios
-        .post(url, params, {
+        .post(this.getUrl(requestConfig.url, urlParams), params, {
+          headers: requestConfig?.headers || {},
+        })
+        .then((res) => {
+          if (this.isSuccessRequest(res)) return resolve(res.data);
+          else reject(res);
+        })
+        .catch(reject);
+    });
+  };
+
+  patchMethod = async (requestConfig, params, urlParams) => {
+    return await new Promise((resolve, reject) => {
+      this.axios
+        .patch(this.getUrl(requestConfig.url, urlParams), params, {
+          headers: requestConfig?.headers || {},
+        })
+        .then((res) => {
+          if (this.isSuccessRequest(res)) return resolve(res.data);
+          else reject(res);
+        })
+        .catch(reject);
+    });
+  };
+
+  deleteMethod = async (requestConfig, params, urlParams) => {
+    return await new Promise((resolve, reject) => {
+      this.axios
+        .delete(this.getUrl(requestConfig.url, urlParams), params, {
           headers: requestConfig?.headers || {},
         })
         .then((res) => {
@@ -121,9 +146,17 @@ class RequestManager {
     const methods = {
       get: this.getMethod,
       post: this.postMethod,
+      patch: this.patchMethod,
+      delete: this.deleteMethod,
     };
     requestKeys.forEach((requestKey) => {
       const request = this.config[requestKey];
+
+      if (methods[request.type])
+        throw new Error(
+          `${request.type} does not exist in methods. Only supported get, post, patch, delete`
+        );
+
       this.request[requestKey] = (params, urlParams) =>
         methods[request.type](request, params, urlParams);
     });
