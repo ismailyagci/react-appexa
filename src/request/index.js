@@ -152,7 +152,7 @@ class RequestManager {
     requestKeys.forEach((requestKey) => {
       const request = this.config[requestKey];
 
-      if (methods[request.type])
+      if (!methods[request.type])
         throw new Error(
           `${request.type} does not exist in methods. Only supported get, post, patch, delete`
         );
