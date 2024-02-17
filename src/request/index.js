@@ -128,9 +128,13 @@ class RequestManager {
   deleteMethod = async (requestConfig, params, urlParams) => {
     return await new Promise((resolve, reject) => {
       this.axios
-        .delete(this.getUrl(requestConfig.url, urlParams), params, {
-          headers: requestConfig?.headers || {},
-        })
+        .delete(
+          this.getUrl(requestConfig.url, urlParams),
+          { data: params },
+          {
+            headers: requestConfig?.headers || {},
+          }
+        )
         .then((res) => {
           if (this.isSuccessRequest(res)) return resolve(res.data);
           else reject(res);
