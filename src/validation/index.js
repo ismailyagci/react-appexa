@@ -1,23 +1,24 @@
 import types from "./types";
-import messages from "./messages";
+import defaultMessages from "./messages";
 import { returnMessage } from "./utils";
 
 /**
-*   @typedef {("faxNumber" | "phoneNumber" | "schema" | "slug" | "password" | "string" | "number" | "email" | "length" | "required" | "array" | "nestedSlug" | "oneOf" | "isObject")} TypePatterns
-*/
+ *   @typedef {("faxNumber" | "phoneNumber" | "schema" | "slug" | "password" | "string" | "number" | "email" | "length" | "required" | "array" | "nestedSlug" | "oneOf" | "isObject")} TypePatterns
+ */
 
 /**
-*   @typedef ValidationInterface
-*   @type {object} 
-*   @property {TypePatterns} type 
-*   @property {object} typeOptions 
-*   @property {string} fieldTitle 
-*/
+ *   @typedef ValidationInterface
+ *   @type {object}
+ *   @property {TypePatterns} type
+ *   @property {object} typeOptions
+ *   @property {string} fieldTitle
+ */
 
-/** 
-*  @param {Object<string, ValidationInterface} schema
-*/
-const validation = (schema = {}, props = {}) => {
+/**
+ *  @param {Object<string, ValidationInterface} schema
+ */
+const validation = (schema = {}, props = {}, messageData) => {
+  const messages = messageData || defaultMessages;
   const propNames = Object.keys(schema);
 
   for (const propName of propNames) {
@@ -27,20 +28,29 @@ const validation = (schema = {}, props = {}) => {
 
     const valueValidate = types.required(value);
     if (schemaFields.optional && !valueValidate) continue;
-    if (!valueValidate) return returnMessage(
-      messages.required(schemaFields.fieldTitle, value, schemaFields.typeOptions)
+    if (!valueValidate)
+      return returnMessage(
+        messages.required(
+          schemaFields.fieldTitle,
+          value,
+          schemaFields.typeOptions
+        )
+      );
+
+    const typeValidate = types[schemaFields.type](
+      value,
+      schemaFields.typeOptions
     );
-    
-    const typeValidate = types[schemaFields.type](value, schemaFields.typeOptions);
     const typeMessage = messages[schemaFields.type];
-    if (!typeValidate) return returnMessage(
-      typeMessage(schemaFields.fieldTitle, value, schemaFields.typeOptions)
-    );
-  };
+    if (!typeValidate)
+      return returnMessage(
+        typeMessage(schemaFields.fieldTitle, value, schemaFields.typeOptions)
+      );
+  }
 
   return {
-    status: true
+    status: true,
   };
 };
-validation.tools = types
+validation.tools = types;
 export default validation;
