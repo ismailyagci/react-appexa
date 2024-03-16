@@ -6,12 +6,12 @@ const Provider = ({ children, storeModules, config }) => {
   const [appReady, setAppReady] = useState(false);
 
   useEffect(() => {
-    container.set("config", config);
     container.onChange((key) => {
       if (key === "requestMethodsCreated") {
         setAppReady(true)
       }
     });
+    container.set("config", config);
   }, []);
 
   return <React.Fragment>
