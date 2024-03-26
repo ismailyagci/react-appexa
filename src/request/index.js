@@ -147,7 +147,7 @@ class RequestManager {
 
   generateRequestMethods() {
     const requestKeys = Object.keys(this?.config || {}).filter(
-      (key) => key !== "baseUrl"
+      (key) => key !== "baseUrl" && key !== "devBaseUrl"
     );
     const methods = {
       get: this.getMethod,
