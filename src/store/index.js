@@ -6,6 +6,7 @@ import { toCamelCase } from "../utils";
 import CRUD from "./crud";
 import loggerMiddleware from 'redux-logger';
 import thunkMiddleware from 'redux-thunk';
+import container from '../container';
 
 let store;
 
@@ -14,9 +15,12 @@ const getStore = () => {
 };
 
 const createStoreModules = (modules) => {
+  const isDevelopment = container.get("isDevelopment")
   const middleware = [thunkMiddleware];
-
-  middleware.push(loggerMiddleware);
+  
+  if(isDevelopment) {
+    middleware.push(loggerMiddleware);
+  }
 
   const reducers = {};
   const createReducer = (container) => {
