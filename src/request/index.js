@@ -26,7 +26,9 @@ class RequestManager {
   createInterceptors = () => {
     this.axios.interceptors.request.use(
       (config) => {
-        config.baseURL = this.config.baseUrl;
+        config.baseURL = container.get("isDevelopment")
+          ? this.config.devBaseUrl
+          : this.config.baseUrl;
         Object.entries(this.headers).forEach(([key, value]) => {
           config.headers[key] = value;
         });
