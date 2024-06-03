@@ -34,7 +34,8 @@ const validation = (schema = {}, props = {}, messageData) => {
           schemaFields.fieldTitle,
           value,
           schemaFields.typeOptions
-        )
+        ),
+        propName
       );
 
     const typeValidate = types[schemaFields.type](
@@ -44,7 +45,8 @@ const validation = (schema = {}, props = {}, messageData) => {
     const typeMessage = messages[schemaFields.type];
     if (!typeValidate)
       return returnMessage(
-        typeMessage(schemaFields.fieldTitle, value, schemaFields.typeOptions)
+        typeMessage(schemaFields.fieldTitle, value, schemaFields.typeOptions),
+        propName
       );
   }
 
