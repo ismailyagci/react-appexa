@@ -69,4 +69,4 @@ createProduct = (data) => async (dispatch) => {
 
 ### Sonuç
 
-`CRUD` sınıfı, `react-appexa` paketi içinde CRUD işlemlerini kolaylaştırarak, geliştirme sürecini hızlandırır ve kod tekrarını azaltır. Bu yaklaşım, CRUD işlemleri için gereken constansların, actinoların ve handleActinların tanımlanmasını ve kullanılmasını otomatikleştirir, böylece geliştiricilerin iş yükünü hafifletir.
+`CRUD` sınıfı, `react-appexa` paketi içinde CRUD işlemlerini kolaylaştırarak, geliştirme sürecini hızlandırır ve kod tekrarını azaltır. Bu yaklaşım, CRUD işlemleri için gereken constansların, actionların ve handleActinların tanımlanmasını ve kullanılmasını otomatikleştirir, böylece geliştiricilerin iş yükünü hafifletir.
