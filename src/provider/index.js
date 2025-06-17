@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { StoreProvider } from "../store";
 import container from "../container";
 
-const Provider = ({ children, storeModules, config, isDevelopment }) => {
+const Provider = ({ children, storeModules, storeMiddlewares, config, isDevelopment }) => {
   const [appReady, setAppReady] = useState(false);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const Provider = ({ children, storeModules, config, isDevelopment }) => {
 
   return (
     <React.Fragment>
-      <StoreProvider modules={storeModules}>
+      <StoreProvider modules={storeModules} storeMiddlewares={storeMiddlewares}>
         {appReady ? children : null}
       </StoreProvider>
     </React.Fragment>

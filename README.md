@@ -1,32 +1,36 @@
 # react-appexa
 
-`react-appexa`, Vite ile oluşturulan React projeleri için temel altyapıları ve araçları sağlayan bir npm paketidir. Bu paketi kullanarak, React projenizin kurulum sürecini hızlandırabilir ve geliştirme sürecinizi daha verimli hale getirebilirsiniz.
+`react-appexa` is an npm package that provides the basic infrastructure and tools for React projects created with Vite. By using this package, you can speed up the setup process of your React project and make your development process more efficient.
 
-## Özellikler
+For a full list of documentation, see the [Documentation Index](./docs/index.md).
 
-- **Hızlı Kurulum**: Vite tabanlı React projeleriniz için hızlı ve kolay kurulum.
-- **Özelleştirilebilir Yapı**: Projelerinizin ihtiyaçlarına göre kolayca özelleştirilebilir yapı.
-- **Performans Optimizasyonları**: Projelerinizin performansını artırmaya yönelik çeşitli optimizasyonlar.
-- **API Yapılandırması**: `appexa.json` ile kolay API yönetimi ve yapılandırması.
-- **VSCode IntelliSense Entegrasyonu**: `appexa` VSCode eklentisi ile geliştirilmiş kod tamamlama ve hata ayıklama özellikleri.
+## Features
 
-## Kurulum
+- **Fast Setup**: Quick and easy setup for your Vite-based React projects.
+- **Customizable Structure**: Easily customizable structure according to your project's needs.
+- **Performance Optimizations**: Various optimizations to improve your project's performance.
+- **API Configuration**: Easy API management and configuration with `appexa.json`.
+- **VSCode IntelliSense Integration**: Enhanced code completion and debugging features with the `appexa` VSCode extension.
+
+## Installation
 
 ### npm
-`react-appexa` paketini npm ile projenize eklemek için aşağıdaki komutu kullanabilirsiniz:
+To add the `react-appexa` package to your project with npm, you can use the following command:
 
 ```bash
 npm install react-appexa
 ```
 
 ### appexa.json
-Kurulumun ardından projenizin root klasöründe `appexa.json` adında bir dosya oluşturun. Bu dosya, API isteklerinin yönetimi için kullanılır ve şu özelliklere sahiptir:
+After installation, create a file named `appexa.json` in the root folder of your project. This file is used for managing API requests and has the following features:
 
-- **API Endpoint Yapılandırması**: Her API işlemi için tür (get, post vb.), URL ve gerekirse ek başlıklar belirlenebilir.
-- **Merkezi Yönetim**: Tüm API istekleri tek bir dosyadan yönetilerek, projenin bakımı ve güncellemesi kolaylaşır.
-- **Esneklik**: İhtiyaca göre `appexa.json` dosyasında değişiklik yaparak API yapılandırmasını özelleştirebilirsiniz.
+- **API Endpoint Configuration**: The type (get, post, etc.), URL, and additional headers if necessary can be specified for each API operation.
+- **Centralized Management**: All API requests are managed from a single file, making project maintenance and updates easier.
+- **Flexibility**: You can customize the API configuration by making changes to the `appexa.json` file as needed.
 
-Örnek `appexa.json` yapılandırması:
+For more details on configuring requests, see the [Request Module documentation](./docs/request.md).
+
+Example `appexa.json` configuration:
 
 ```json
 {
@@ -35,19 +39,20 @@ Kurulumun ardından projenizin root klasöründe `appexa.json` adında bir dosya
     "createItem": {
       "type": "post",
       "url": "item/createItem"
-    },
-    // Diğer API endpoint yapılandırmaları...
+    }
   }
 }
 ```
 
-### vscode plugin
-VSCode IDE'nize [appexa](https://marketplace.visualstudio.com/items?itemName=371digital.appexa) eklentisini kurarak IntelliSense özelliklerini etkinleştirebilirsiniz. Bu eklenti, `appexa.json` dosyasınızla uyumlu şekilde çalışarak, kod yazımınızı ve hata ayıklama süreçlerinizi kolaylaştırır.
+### VSCode Plugin
+You can enable IntelliSense features by installing the [appexa](https://marketplace.visualstudio.com/items?itemName=371digital.appexa) extension in your VSCode IDE. This extension works in harmony with your `appexa.json` file, facilitating your coding and debugging processes.
 
-## Kullanım
+## Usage
 
 ### Provider
-`Appexa` provider'ı React uygulamanıza eklemeniz gerekmektedir. Bunun için "src/main.jsx" dosyanıza gidip, aşağıdaki şekilde kurulumunuzu başlatabilirsiniz:
+You need to add the `Appexa` provider to your React application. To do this, go to your `src/main.jsx` file and start your setup as follows:
+
+For more details, see the [Provider Component documentation](./docs/provider.md).
 
 ```jsx
 import React from 'react';
@@ -67,21 +72,23 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 ```
 
 ### Store Modules
-`react-appexa` ile Redux Store süreçlerinizi yönetebilirsiniz. Bu noktada uygulamanızın `src` dosyası içerisine `storeModules` adında bir klasör oluşturun ve bu klasöre `index.jsx` ekleyin. Bu dosya, Redux store modüllerinizi bir araya getirecektir:
+You can manage your Redux Store processes with `react-appexa`. Create a folder named `storeModules` inside your application's `src` directory and add an `index.jsx` file to this folder. This file will bring together your Redux store modules:
 
 ```jsx
-
 export default {
 };
 ```
 
-`storeModules` süreçlerini örneklerle anlayacağız. İlk örneğimiz auth süreçleri olacak. Detaylar için [bu](https://github.com/ismailyagci/react-appexa/blob/master/docs/storeModules.md) dökümana bakabilirsiniz. CRUD işlemleri için [bu](https://github.com/ismailyagci/react-appexa/blob/master/docs/storeModulesCrud.md) dökümana bakabilirisinz.
-
+For a detailed guide on creating store modules, see the [Auth Module Example](./docs/storeModules.md). For simplifying CRUD operations, refer to the [Using the CRUD Class documentation](./docs/storeModulesCrud.md).
 
 ### Request
+The request module is designed to simplify the management of API requests. For details, you can refer to the [Request Module documentation](./docs/request.md).
 
-Request süreçlerinin yönetimini kolaylaştırmak için oluşturulmuşdur. Detaylar için [bu](https://github.com/ismailyagci/react-appexa/blob/master/docs/request.md) dökümana bakabilirsiniz.
+### Other Features
+`react-appexa` also includes other utilities:
+- **Validation**: A powerful module for data validation. See the [Validation documentation](./docs/validation.md).
+- **Async Dispatch**: Utilities for handling sequential asynchronous Redux actions. See the [Async Dispatch documentation](./docs/asyncDispatch.md).
 
-## Lisans
+## License
 
-`react-appexa` [MIT Lisansı](LICENSE) altında lisanslanmıştır.
+`react-appexa` is licensed under the [MIT License](LICENSE).

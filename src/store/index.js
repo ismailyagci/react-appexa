@@ -14,13 +14,15 @@ const getStore = () => {
   return store;
 };
 
-const createStoreModules = (modules) => {
+const createStoreModules = (modules, storeMiddlewares) => {
   const isDevelopment = container.get("isDevelopment")
   const middleware = [thunkMiddleware];
   
   if(isDevelopment) {
     middleware.push(loggerMiddleware);
   }
+
+  middleware.push(...(storeMiddlewares || []));
 
   const reducers = {};
   const createReducer = (container) => {
@@ -50,8 +52,8 @@ const createStoreModules = (modules) => {
 };
 
 
-export const StoreProvider = ({ children, modules }) => {
-  store = createStoreModules(modules);
+export const StoreProvider = ({ children, modules, storeMiddlewares = [] }) => {
+  store = createStoreModules(modules, storeMiddlewares);
   return <Provider store={store}>
     {children}
   </Provider>
